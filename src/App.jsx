@@ -1,35 +1,43 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import { useWeatherSearch } from './hooks/useWeatherSearch';
+import Logo from './components/Logo';
+import CitySearchInput from './components/CitySearchInput/CitySearchInput';
+import WeatherDisplay from './components/WeatherDisplay/WeatherDisplay';
+
+const AppContainer = styled.div`
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    `;
+
+const SeachInputContainer = styled.div`
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 1rem;
+    `;
 
 function App() {
-  const [count, setCount] = useState(0)
+    const [city, setCity] = useState('');
+    const { weatherData, handleSearch } = useWeatherSearch();
 
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    const onSearch = () => {
+        handleSearch(city);
+    };
+
+    return (
+        <AppContainer>
+            <SeachInputContainer>
+                <Logo />
+                <CitySearchInput city={city} setCity={setCity} onSearch={onSearch} />
+            </SeachInputContainer>
+            <WeatherDisplay weatherData={weatherData} city={city} />
+        </AppContainer>
+    );
 }
 
-export default App
+export default App;
