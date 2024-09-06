@@ -1,8 +1,20 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { fetchWeather } from '../api/weatherApi';
 
 export function useWeatherSearch() {
     const [weatherData, setWeatherData] = useState(null);
+    const [city, setCity] = useState('');
+
+    useEffect(() => {
+        const savedCity = localStorage.getItem('city');
+        const savedLat = localStorage.getItem('lat');
+        const savedLon = localStorage.getItem('lon');
+
+        if (savedCity && savedLat && savedLon) {
+            setCity(savedCity);
+            fetchWeather(savedLat, savedLon).then(data => setWeatherData(data));
+        }
+    }, []);
 
     const handleSearch = async (city) => {
         try {
@@ -16,6 +28,9 @@ export function useWeatherSearch() {
                 const weatherData = await fetchWeather(lat, lon);
                 console.log(weatherData);
                 setWeatherData(weatherData);
+                localStorage.setItem('city', city);
+                localStorage.setItem('lat', lat);
+                localStorage.setItem('lon', lon);
             } else {
                 console.error('City not found');
                 setWeatherData(null);
@@ -25,6 +40,5 @@ export function useWeatherSearch() {
         }
     };
 
-    return { weatherData, handleSearch };
+    return { weatherData, city, setCity, handleSearch };
 }
-

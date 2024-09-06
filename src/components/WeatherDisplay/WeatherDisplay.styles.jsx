@@ -3,7 +3,6 @@ import styled from 'styled-components';
 export const WeatherContainer = styled.div`
     width: 100%;
     padding: 1rem; 
-    background-color: var(--secondary-color);
     color: var(--white-color);
     display: flex;
     align-items: center;    
@@ -11,6 +10,13 @@ export const WeatherContainer = styled.div`
 
 export const CityName = styled.p`
     font-size: 1.5rem;
+`;
+
+export const WeatherTempContainer = styled.div`
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    flex-wrap: wrap;
 `;
 
 export const WeatherTemp = styled.p`

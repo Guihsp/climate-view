@@ -1,5 +1,13 @@
 import React from 'react';
-import { WeatherContainer, CityName, WeatherTemp, WeatherDetails, WeatherDescription, WeatherIcon } from './WeatherDisplay.styles';
+import { 
+    WeatherContainer, 
+    CityName, 
+    WeatherTempContainer,
+    WeatherTemp, 
+    WeatherDetails, 
+    WeatherDescription, 
+    WeatherIcon 
+} from './WeatherDisplay.styles';
 
 import { RiWindyFill } from "react-icons/ri";
 import { FaTemperatureArrowDown, FaTemperatureArrowUp } from "react-icons/fa6";
@@ -12,7 +20,10 @@ function WeatherDisplay({ weatherData, city }) {
         <WeatherContainer>
             <div>
                 <CityName>{city}</CityName>
-                <WeatherTemp>{(weatherData.main.temp).toFixed(0)}°C</WeatherTemp>
+                <WeatherTempContainer>
+                    <WeatherTemp>{(weatherData.main.temp).toFixed(0)}°C</WeatherTemp>
+                    <WeatherIcon src={`http://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`} alt="Weather Icon" />
+                </WeatherTempContainer>
                 <WeatherDescription>{(weatherData.weather[0].description).toUpperCase()}</WeatherDescription>
                 <WeatherDetails>
                     <p><RiWindyFill /> {weatherData.wind.speed} m/s</p>
@@ -21,7 +32,6 @@ function WeatherDisplay({ weatherData, city }) {
                     <p><FaTemperatureArrowDown /> {(weatherData.main.temp_min).toFixed(0)}°C</p>
                 </WeatherDetails>
             </div>
-            <WeatherIcon src={`http://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`} alt="Weather Icon" />
         </WeatherContainer>
     );
 }
