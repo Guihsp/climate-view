@@ -35,7 +35,7 @@ function App() {
                 <Logo />
                 <CitySearchInput city={city} setCity={setCity} onSearch={onSearch} />
             </SeachInputContainer>
-            <WeatherDisplay weatherData={weatherData} city={city} />
+            <WeatherDisplay weatherData={weatherData} />
         </AppContainer>
     );
 }
