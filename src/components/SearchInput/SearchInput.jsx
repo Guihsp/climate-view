@@ -15,6 +15,7 @@ function SearchInput({ city, setCity, onSearch }) {
                     onChange={(e) => setCity(e.target.value)}
                     placeholder="Digite o nome da cidade"
                     onKeyPress={handleKeyPress}
+                    name='city'
                 />
                 <SearchIcon onClick={onSearch} />
             </InputContainer>

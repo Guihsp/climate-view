@@ -44,7 +44,7 @@ export function useWeatherSearch() {
         setIsLoading(true);
         try {
             const geocodeResponse = await fetch(
-                `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${import.meta.env.VITE_API_KEY}`
+                `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${import.meta.env.VITE_API_KEY}`
             );
             const geocodeData = await geocodeResponse.json();
 
@@ -67,7 +67,6 @@ export function useWeatherSearch() {
                 setError('Cidade não encontrada. Digite uma cidade válida.');
             }
         } catch (error) {
-            console.error('Error fetching weather data:', error);
             setError('Erro ao buscar dados meteorológicos. Por favor, tente novamente.');
         } finally {
             setIsLoading(false);
