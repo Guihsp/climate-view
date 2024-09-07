@@ -21,7 +21,7 @@ function WeatherDisplay({ weatherData }) {
                 <CityName>{localStorage.getItem('city')}</CityName>
                 <WeatherTempContainer>
                     <WeatherTemp>{(weatherData.main.temp).toFixed(0)}°C</WeatherTemp>
-                    <WeatherIcon src={`http://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`} alt="Weather Icon" />
+                    <WeatherIcon src={`https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`} alt="Weather Icon" />
                 </WeatherTempContainer>
                 <WeatherDescription>{(weatherData.weather[0].description).toUpperCase()}</WeatherDescription>
                 <WeatherDetails>
