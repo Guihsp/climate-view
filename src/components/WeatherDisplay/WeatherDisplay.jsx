@@ -13,12 +13,11 @@ import { RiWindyFill } from "react-icons/ri";
 import { FaTemperatureArrowDown, FaTemperatureArrowUp } from "react-icons/fa6";
 import { SiRainmeter } from "react-icons/si";
 
-function WeatherDisplay({ weatherData, city }) {
+function WeatherDisplay({ weatherData }) {
     if (!weatherData) return null;
 
     return (
         <WeatherContainer>
-            <div>
                 <CityName>{localStorage.getItem('city')}</CityName>
                 <WeatherTempContainer>
                     <WeatherTemp>{(weatherData.main.temp).toFixed(0)}°C</WeatherTemp>
@@ -31,7 +30,6 @@ function WeatherDisplay({ weatherData, city }) {
                     <p><FaTemperatureArrowUp /> {(weatherData.main.temp_max).toFixed(0)}°C</p>
                     <p><FaTemperatureArrowDown /> {(weatherData.main.temp_min).toFixed(0)}°C</p>
                 </WeatherDetails>
-            </div>
         </WeatherContainer>
     );
 }

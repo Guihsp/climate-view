@@ -4,8 +4,6 @@ export const WeatherContainer = styled.div`
     width: 100%;
     padding: 1rem; 
     color: var(--white-color);
-    display: flex;
-    align-items: center;    
 `;
 
 export const CityName = styled.p`

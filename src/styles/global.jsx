@@ -11,12 +11,13 @@ export const GlobalStyle = createGlobalStyle`
     :root {
         --primary-color: #1e213a;
         --secondary-color: #100e1d;
-        --tertiary-color: #e7e7eb;
+        --tertiary-color: #e7e7eb65;
         --quaternary-color: #a09fb1;
         --quinary-color: #616475;
         --senary-color: #3c47e9;
         --white-color: #eee;
         --black-color: #000;
+        --error-color: #ff4c4c;
     }
 
     body {

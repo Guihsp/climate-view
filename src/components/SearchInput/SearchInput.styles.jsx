@@ -9,15 +9,14 @@ export const InputContainer = styled.div`
     gap: 5px;
     padding: 0 10px 0 0;
     border-radius: 24px;
-    border: 1px solid var(--white-color);
-    color: var(--white-color);
+    background-color:var(--tertiary-color);
     font-size: 16px;
 `;
 
 export const Input = styled.input`
     position: relative;
     width: 100%;
-    padding: 10px 15px;
+    padding: .8rem 1rem;
     border: none;
     color: var(--white-color);
     font-size: 16px;
@@ -33,7 +32,7 @@ export const Input = styled.input`
 `;
 
 export const SearchIcon = styled(HiMiniMagnifyingGlass)`
-    font-size: 20px;
+    font-size: 1.5rem;
     color: #fff;
     cursor: pointer;
 `;
