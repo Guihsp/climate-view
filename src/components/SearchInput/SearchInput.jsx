@@ -7,25 +7,25 @@ function SearchInput({ city, setCity, onSearch }) {
     };
 
     return (
-        <>
-            <InputContainer>
-                <Input
-                    type="text"
-                    value={city}
-                    onChange={(e) => setCity(e.target.value)}
-                    placeholder="Digite o nome da cidade"
-                    onKeyPress={handleKeyPress}
-                />
-                <SearchIcon onClick={onSearch} />
-            </InputContainer>
-        </>
+        <InputContainer>
+            <Input
+                type="text"
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
+                placeholder="Digite o nome da cidade..."
+                onKeyPress={handleKeyPress}
+                name="city"
+            />
+            <SearchIcon onClick={onSearch} />
+        </InputContainer>
+
     );
 };
 
 SearchInput.propTypes = {
     city: PropTypes.string.isRequired,
     setCity: PropTypes.func.isRequired,
-    onSearch: PropTypes.func.isRequired, 
+    onSearch: PropTypes.func.isRequired,
 };
 
 export default SearchInput;
