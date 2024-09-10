@@ -6,11 +6,10 @@ export const InputContainer = styled.div`
     align-items: center;
     max-width: 500px;
     width: 100%;
-    gap: 5px;
     padding: 0 10px 0 0;
     border-radius: 24px;
-    background-color:var(--tertiary-color);
-    font-size: 16px;
+    background-color: ${props => props.theme.colors.secondary};
+    font-size: 1rem;
 `;
 
 export const Input = styled.input`
@@ -18,7 +17,7 @@ export const Input = styled.input`
     width: 100%;
     padding: .8rem 1rem;
     border: none;
-    color: var(--white-color);
+    color: ${props => props.theme.colors.primary};
     font-size: 16px;
     background-color: transparent;
 
@@ -33,6 +32,6 @@ export const Input = styled.input`
 
 export const SearchIcon = styled(HiMiniMagnifyingGlass)`
     font-size: 1.5rem;
-    color: #fff;
+    color: ${props => props.theme.colors.primary};
     cursor: pointer;
 `;

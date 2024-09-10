@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import axios from 'axios';
 import { fetchWeather } from '../api/weatherApi';
 
 function capitalizeWords(str) {
@@ -10,12 +11,29 @@ function capitalizeWords(str) {
 }
 
 async function fetchCityPhoto(city) {
-    const response = await fetch(`https://api.unsplash.com/search/photos?query=${city}&client_id=${import.meta.env.VITE_UNSPLASH_ACCESS_KEY}`);
-    const data = await response.json();
-    if (data.results.length > 0) {
-        return data.results[0].urls.regular;
+    const BASE_URL = 'https://api.unsplash.com/search/photos';
+    const API_KEY = import.meta.env.VITE_UNSPLASH_ACCESS_KEY;
+
+    try {
+        const response = await axios.get(`${BASE_URL}`, {
+            params: {
+                query: city,
+                order_by: 'relevant',
+                orientation: 'landscape',
+                page: 2,
+                per_page: 2,
+                client_id: API_KEY
+            }
+        });
+        const data = response.data;
+        if (data.results.length > 0) {
+            return data.results[0].urls.regular;
+        }
+        return null;
+    } catch (error) {
+        console.error('Error fetching city photo:', error);
+        return null;
     }
-    return null;
 }
 
 export function useWeatherSearch() {
@@ -42,11 +60,19 @@ export function useWeatherSearch() {
 
     const handleSearch = async (city) => {
         setIsLoading(true);
+
+        const BASE_URL = 'https://api.openweathermap.org/geo/1.0/direct';
+        const API_KEY = import.meta.env.VITE_API_KEY;
+
         try {
-            const geocodeResponse = await fetch(
-                `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=${import.meta.env.VITE_API_KEY}`
-            );
-            const geocodeData = await geocodeResponse.json();
+            const geocodeResponse = await axios.get(`${BASE_URL}`, {
+                params: {
+                    q: city,
+                    limit: 1,
+                    appid: API_KEY
+                }
+            });
+            const geocodeData = geocodeResponse.data;
 
             if (geocodeData.length > 0) {
                 const { lat, lon } = geocodeData[0];
@@ -59,12 +85,12 @@ export function useWeatherSearch() {
                 localStorage.setItem('lon', lon);
                 if (cityPhotoUrl) {
                     setCityPhoto(cityPhotoUrl);
-                    localStorage.setItem('cityPhoto', cityPhotoUrl); // Salvar a URL da foto no localStorage
+                    localStorage.setItem('cityPhoto', cityPhotoUrl);
                 }
                 setCity('');
                 setError('');
             } else {
-                setError('Cidade não encontrada. Digite uma cidade válida.');
+                setError('Cidade não encontrada. Por favor, tente novamente.');
             }
         } catch (error) {
             setError('Erro ao buscar dados meteorológicos. Por favor, tente novamente.');
